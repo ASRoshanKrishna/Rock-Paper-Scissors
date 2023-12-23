@@ -1,3 +1,6 @@
+let pp = 0;
+let cp = 0;
+
 function getComputerChoice(){
     let c = Math.floor(Math.random() * 3);
     switch(c){
@@ -10,7 +13,9 @@ function getComputerChoice(){
     }
 }
 
-function playRound(playerSelection, computerSelection){
+function playRound(){
+    const playerSelection = getPlayerChoice();
+    const computerSelection = getComputerChoice();
     const r = 'Rock beats Scissors"';
     const p = 'Paper beats Rock"';
     const s = 'Scissors beats Paper"';
@@ -19,24 +24,39 @@ function playRound(playerSelection, computerSelection){
     const t = "Tie!"
     const ps = playerSelection.toLowerCase();
     const cs = computerSelection.toLowerCase();
-    if(cs===ps)
-    return t;
+    if(cs===ps){
+        pp++;
+        cp++;
+        return t;
+    }
     switch(ps){
         case "rock":
-            if(cs=="paper")
-            return l+p;
-            else
-            return w+r;
+            if(cs=="paper"){
+                cp++;
+                return l+p;
+            }
+            else{
+                pp++;
+                return w+r;
+            }
         case "paper":
-            if(cs=="scissors")
-            return l+s;
-            else
-            return w+p;
+            if(cs=="scissors"){
+                cp++;
+                return l+s;
+            }
+            else{
+                pp++;
+                return w+p;
+            }
         case "scissors":
-            if(cs=="rock")
-            return l+r;
-            else
-            return w+s;
+            if(cs=="rock"){
+                cp++;
+                return l+r;
+            }
+            else{
+                pp++;
+                return w+s;
+            }
     }
 }
 
@@ -44,7 +64,11 @@ function getPlayerChoice(){
     return prompt("Your Choice: ");
 }
 
-const playerSelection = getPlayerChoice();
-const computerSelection = getComputerChoice();
+function game(){
+    for(let i = 1;i < 6;i++){
+        console.log("Round "+i+":",playRound());
+        console.log("Player Score:",pp,"Computer Score:",cp);
+    }
+}
 
-console.log(computerSelection, playRound(playerSelection,computerSelection));
+game();
