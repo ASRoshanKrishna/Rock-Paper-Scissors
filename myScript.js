@@ -1,5 +1,10 @@
 let pp = 0;
 let cp = 0;
+let i = 1;
+
+function getPlayerChoice(){
+    return prompt("Your Choice: ");
+}
 
 function getComputerChoice(){
     let c = Math.floor(Math.random() * 3);
@@ -13,9 +18,14 @@ function getComputerChoice(){
     }
 }
 
-function playRound(){
+function game(){
     const playerSelection = getPlayerChoice();
     const computerSelection = getComputerChoice();
+    console.log("Round "+i+":",playRound(playerSelection,computerSelection));
+    console.log("Player Score:",pp,"Computer Score:",cp);
+}
+
+function playRound(playerSelection,computerSelection){
     const r = 'Rock beats Scissors"';
     const p = 'Paper beats Rock"';
     const s = 'Scissors beats Paper"';
@@ -25,9 +35,8 @@ function playRound(){
     const ps = playerSelection.toLowerCase();
     const cs = computerSelection.toLowerCase();
     if(cs===ps){
-        pp++;
-        cp++;
-        return t;
+        console.log("It's a Tie! Round",i,"is Re-played");
+        return playRound(getPlayerChoice(),getComputerChoice());
     }
     switch(ps){
         case "rock":
@@ -57,18 +66,18 @@ function playRound(){
                 pp++;
                 return w+s;
             }
+        default:
+            alert("Invalid Choice. It's Rock-Paper-Scissors!");
+            return playRound(getPlayerChoice(),computerSelection);
     }
 }
 
-function getPlayerChoice(){
-    return prompt("Your Choice: ");
-}
+for(i;i<6;i++)
+    game();
 
-function game(){
-    for(let i = 1;i < 6;i++){
-        console.log("Round "+i+":",playRound());
-        console.log("Player Score:",pp,"Computer Score:",cp);
-    }
-}
-
-game();
+if(pp==cp)
+    console.log("Tie!");
+    else if(pp>cp)
+    console.log("Congrats! You Won!");
+    else
+    console.log("You Lost! Better luck next time.");
