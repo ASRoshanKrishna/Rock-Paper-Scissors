@@ -2,82 +2,90 @@ let pp = 0;
 let cp = 0;
 let i = 1;
 
-function getPlayerChoice(){
-    return prompt("Your Choice: ");
-}
-
 function getComputerChoice(){
     let c = Math.floor(Math.random() * 3);
     switch(c){
         case 0:
-            return "Rock";
+            return "rock";
         case 1:
-            return "Paper";
+            return "paper";
         case 2:
-            return "Scissors";
+            return "scissors";
     }
 }
 
-function game(){
-    const playerSelection = getPlayerChoice();
-    const computerSelection = getComputerChoice();
-    console.log("Round "+i+":",playRound(playerSelection,computerSelection));
-    console.log("Player Score:",pp,"Computer Score:",cp);
-}
-
-function playRound(playerSelection,computerSelection){
+function playRound(playerSelection){
     const r = 'Rock beats Scissors"';
     const p = 'Paper beats Rock"';
     const s = 'Scissors beats Paper"';
     const w = '"You Win! ';
     const l = '"You Lose! ';
     const t = "Tie!"
-    const ps = playerSelection.toLowerCase();
-    const cs = computerSelection.toLowerCase();
+    const ps = playerSelection;
+    const cs = getComputerChoice();
+    console.log(ps);
+    console.log(cs);
     if(cs===ps){
-        console.log("It's a Tie! Round",i,"is Re-played");
-        return playRound(getPlayerChoice(),getComputerChoice());
+        console.log("It's a Tie!");
     }
-    switch(ps){
-        case "rock":
-            if(cs=="paper"){
-                cp++;
-                return l+p;
-            }
-            else{
-                pp++;
-                return w+r;
-            }
-        case "paper":
-            if(cs=="scissors"){
-                cp++;
-                return l+s;
-            }
-            else{
-                pp++;
-                return w+p;
-            }
-        case "scissors":
-            if(cs=="rock"){
-                cp++;
-                return l+r;
-            }
-            else{
-                pp++;
-                return w+s;
-            }
-        default:
-            alert("Invalid Choice. It's Rock-Paper-Scissors!");
-            return playRound(getPlayerChoice(),computerSelection);
+    else{
+        switch(ps){
+            case "rock":
+                if(cs=="paper"){
+                    cp++;
+                    console.log(l+p);
+                    break;
+                }
+                else{
+                    pp++;
+                    console.log(w+r);
+                    break;
+                }
+            case "paper":
+                if(cs=="scissors"){
+                    cp++;
+                    console.log(l+s);
+                    break;
+                }
+                else{
+                    pp++;
+                    console.log(w+p);
+                    break;
+                }
+            case "scissors":
+                if(cs=="rock"){
+                    cp++;
+                    console.log(l+r);
+                    break;
+                }
+                else{
+                    pp++;
+                    console.log(w+s);
+                    break;
+                }
+        }
     }
 }
 
-for(i;i<6;i++)
-    game();
-
-if(pp==cp)
+/*if(pp==cp)
     console.log("Tie!");
     else if(pp>cp)
     console.log("Congrats! You Won!");
     else
-    console.log("You Lost! Better luck next time.");
+    console.log("You Lost! Better luck next time.");*/
+
+const btn0 = document.querySelector('#btn0');
+btn0.addEventListener('click', () =>{
+    const playerSelection = "rock";
+    playRound(playerSelection);
+});
+const btn1 = document.querySelector('#btn1');
+btn1.addEventListener('click', () =>{
+    const playerSelection = "paper";    
+    playRound(playerSelection);
+});
+const btn2 = document.querySelector('#btn2');
+btn2.addEventListener('click', () =>{
+    const playerSelection = "scissors";
+    playRound(playerSelection);
+});
