@@ -1,6 +1,9 @@
 let pp = 0;
 let cp = 0;
 let i = 1;
+let count = 0;
+
+const container1 = document.querySelector(".container1");
 
 function getComputerChoice(){
     let c = Math.floor(Math.random() * 3);
@@ -23,56 +26,107 @@ function playRound(playerSelection){
     const t = "Tie!"
     const ps = playerSelection;
     const cs = getComputerChoice();
-    console.log(ps);
-    console.log(cs);
+    zero();
     if(cs===ps){
-        console.log("It's a Tie!");
+        const show = document.createElement('div');
+        show.textContent = "It's a Tie!";
+        container1.appendChild(show);
     }
     else{
         switch(ps){
             case "rock":
                 if(cs=="paper"){
                     cp++;
-                    console.log(l+p);
+                    const show = document.createElement('div');
+                    show.textContent = l+p;
+                    container1.appendChild(show);
+                    count++;
+                    five();
                     break;
                 }
                 else{
                     pp++;
-                    console.log(w+r);
+                    const show = document.createElement('div');
+                    show.textContent = w+r;
+                    container1.appendChild(show);
+                    count++;
+                    five();
                     break;
                 }
             case "paper":
                 if(cs=="scissors"){
                     cp++;
-                    console.log(l+s);
+                    const show = document.createElement('div');
+                    show.textContent = l+s;
+                    container1.appendChild(show);
+                    count++;
+                    five();
                     break;
                 }
                 else{
                     pp++;
-                    console.log(w+p);
+                    const show = document.createElement('div');
+                    show.textContent = w+p;
+                    container1.appendChild(show);
+                    count++;
+                    five();
                     break;
                 }
             case "scissors":
                 if(cs=="rock"){
                     cp++;
-                    console.log(l+r);
+                    const show = document.createElement('div');
+                    show.textContent = l+r;
+                    container1.appendChild(show);
+                    count++;
+                    five();
                     break;
                 }
                 else{
                     pp++;
-                    console.log(w+s);
+                    const show = document.createElement('div');
+                    show.textContent = w+s;
+                    container1.appendChild(show);
+                    count++;
+                    five();
                     break;
                 }
         }
     }
 }
 
-/*if(pp==cp)
-    console.log("Tie!");
-    else if(pp>cp)
-    console.log("Congrats! You Won!");
-    else
-    console.log("You Lost! Better luck next time.");*/
+function zero(){
+    if(count==0){
+        let child = container1.lastElementChild;
+        while(child){
+            container1.removeChild(child);
+            child = container1.lastElementChild;
+        }
+    }
+}
+
+function five(){
+    if(count==5){
+        if(pp==cp){
+            const show = document.createElement('div');
+            show.textContent = `"Game ended in Tie!"`;
+            container1.appendChild(show);
+            count = 0;
+        }
+        else if(pp>cp){
+            const show = document.createElement('div');
+            show.textContent = `"Congrats! You won the game."`;
+            container1.appendChild(show);
+            count = 0;
+        }
+        else{
+            const show = document.createElement('div');
+            show.textContent = `"You lost, Better luck next time!"`;
+            container1.appendChild(show);
+            count = 0;
+        }
+    }
+}
 
 const btn0 = document.querySelector('#btn0');
 btn0.addEventListener('click', () =>{
@@ -89,3 +143,5 @@ btn2.addEventListener('click', () =>{
     const playerSelection = "scissors";
     playRound(playerSelection);
 });
+
+
