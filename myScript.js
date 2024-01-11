@@ -115,16 +115,18 @@ function zero(){
 function five(){
     if(pp==5 || cp==5){
         if(pp>cp){
+            count = 0;
+            zero();
             const show = document.createElement('div');
             show.textContent = `"CONGRATS, YOU WON THE GAME"`;
             container1.appendChild(show);
-            count = 0;
         }
         else{
+            count = 0;
+            zero();
             const show = document.createElement('div');
             show.textContent = `"YOU LOST, BETTER LUCK NEXT TIME"`;
             container1.appendChild(show);
-            count = 0;
         }
         pp=0;
         cp=0;
