@@ -3,7 +3,11 @@ let cp = 0;
 let i = 1;
 let count = 0;
 
+alert("First one to score 5 wins!");
+
 const container1 = document.querySelector(".container1");
+const playerScore = document.querySelector("#score1");
+const computerScore = document.querySelector("#score2");
 
 function getComputerChoice(){
     let c = Math.floor(Math.random() * 3);
@@ -41,7 +45,7 @@ function playRound(playerSelection){
                     show.textContent = l+p;
                     container1.appendChild(show);
                     count++;
-                    five();
+                    computerScore.textContent = cp;
                     break;
                 }
                 else{
@@ -50,7 +54,7 @@ function playRound(playerSelection){
                     show.textContent = w+r;
                     container1.appendChild(show);
                     count++;
-                    five();
+                    playerScore.textContent = pp;
                     break;
                 }
             case "paper":
@@ -60,7 +64,7 @@ function playRound(playerSelection){
                     show.textContent = l+s;
                     container1.appendChild(show);
                     count++;
-                    five();
+                    computerScore.textContent = cp;
                     break;
                 }
                 else{
@@ -69,7 +73,7 @@ function playRound(playerSelection){
                     show.textContent = w+p;
                     container1.appendChild(show);
                     count++;
-                    five();
+                    playerScore.textContent = pp;
                     break;
                 }
             case "scissors":
@@ -79,7 +83,7 @@ function playRound(playerSelection){
                     show.textContent = l+r;
                     container1.appendChild(show);
                     count++;
-                    five();
+                    computerScore.textContent = cp;
                     break;
                 }
                 else{
@@ -88,15 +92,18 @@ function playRound(playerSelection){
                     show.textContent = w+s;
                     container1.appendChild(show);
                     count++;
-                    five();
+                    playerScore.textContent = pp;
                     break;
                 }
         }
     }
+    five();
 }
 
 function zero(){
     if(count==0){
+        playerScore.textContent = pp;
+        computerScore.textContent = cp;
         let child = container1.lastElementChild;
         while(child){
             container1.removeChild(child);
@@ -106,25 +113,21 @@ function zero(){
 }
 
 function five(){
-    if(count==5){
-        if(pp==cp){
+    if(pp==5 || cp==5){
+        if(pp>cp){
             const show = document.createElement('div');
-            show.textContent = `"Game ended in Tie!"`;
-            container1.appendChild(show);
-            count = 0;
-        }
-        else if(pp>cp){
-            const show = document.createElement('div');
-            show.textContent = `"Congrats! You won the game."`;
+            show.textContent = `"CONGRATS, YOU WON THE GAME"`;
             container1.appendChild(show);
             count = 0;
         }
         else{
             const show = document.createElement('div');
-            show.textContent = `"You lost, Better luck next time!"`;
+            show.textContent = `"YOU LOST, BETTER LUCK NEXT TIME"`;
             container1.appendChild(show);
             count = 0;
         }
+        pp=0;
+        cp=0;
     }
 }
 
