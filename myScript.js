@@ -9,6 +9,9 @@ const container1 = document.querySelector(".container1");
 const playerScore = document.querySelector("#score1");
 const computerScore = document.querySelector("#score2");
 
+const again = document.createElement('button');
+again.textContent = "Play Again";
+
 function getComputerChoice(){
     let c = Math.floor(Math.random() * 3);
     switch(c){
@@ -120,6 +123,7 @@ function five(){
             const show = document.createElement('div');
             show.textContent = `"CONGRATS, YOU WON THE GAME"`;
             container1.appendChild(show);
+            container1.appendChild(again);
         }
         else{
             count = 0;
@@ -127,6 +131,7 @@ function five(){
             const show = document.createElement('div');
             show.textContent = `"YOU LOST, BETTER LUCK NEXT TIME"`;
             container1.appendChild(show);
+            container1.appendChild(again);
         }
         pp=0;
         cp=0;
@@ -149,4 +154,4 @@ btn2.addEventListener('click', () =>{
     playRound(playerSelection);
 });
 
-
+again.addEventListener('click', ()=> location.reload());
